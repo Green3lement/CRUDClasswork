@@ -2,6 +2,8 @@
 <html>
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1">
     <title> Confetti Cuisine</title>
     <link rel="stylesheet" href="/css/confetti_cuisine.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -11,7 +13,7 @@
 
 <body>
     <div id="nav">
-        <div class="col-sm nav-align"> 
+        <div class="col-sm nav-align">
             <h1>Confetti Cuisine</h1>
         </div>
         <div class="col-sm nav-align">
@@ -21,15 +23,53 @@
             <a href="/courses">
                 <span class="button">Courses</span>
             </a>
-            <a href="/contact">
+            <a href="/subscriber/new">
                 <span class="button">Contact</span>
             </a>
+            <a href="/users">
+                <span class="button">Users</span>
+            </a>
+        </div>
+        <div class="login">
+            <% if (loggedIn) { % <p> Logged in as <a href="<%=`/users/${currentUser._id}`%>">
+                    <%= currentUser.fullName %>
+                </a>
+                <span class="log-out">
+                    <a href="/users/logout">Log out</a>
+                </span>
+                <%} else { %>
+                    <a href="/users/login">Log in</a>
         </div>
     </div>
-    <%- body%>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+
+    <div class="flashes">
+        <% if(flashMessages) { %>
+            <% if(flashMessages.success) { %>
+                <div class="flash success">
+                    <%= flashMessages.success %>
+                </div>
+                <% } else if(flashMessages.error) {%>
+                    <div class="flash error">
+                        <%= flashMessages.error %>
+                    </div>
+                    <% } %>
+                        <% } %>
+    </div>
+
+    <div class="container">
+        <%- body%>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
 </body>
 
