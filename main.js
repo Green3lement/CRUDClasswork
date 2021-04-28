@@ -1,7 +1,7 @@
 "use strict";
 
 const express = require("express"), app = express(),
-    router = express.Router(),
+    router = require("./routes/index"),
     homeController = require("./controllers/homeController"),
     errorController = require("./controllers/errorController"),
     subscriberController = require("./controllers/subscriberController"),
@@ -30,96 +30,50 @@ app.set("view engine", "ejs");
 
 
 
-router.use(
+app.use(
     methodOverride( "_method", { 
         methods: ["POST", "GET"]
     })
 );
 
 
-router.use(layouts);
-router.use(express.static("public"));
-router.use(expressValidator());
-router.use(
+app.use(layouts);
+app.use(express.static("public"));
+app.use(expressValidator());
+app.use(
     express.urlencoded({
         extended: false
     })
 );
-router.use(express.json());
+app.use(express.json());
 
-router.use(cookieParser("my_passcode"));
-router.use(expressSession({
+app.use(cookieParser("my_passcode"));
+app.use(expressSession({
     secret: "my_passcode",
     cookie: {
-        maxAge: 360000
+        maxAge: 400000
     },
     resave: false,
     saveUninitialized: false
 }));
 
-router.use(connectFlash());
+app.use(connectFlash());
 
-router.use(passport.initialize());
-router.use(passport.session());
+app.use(passport.initialize());
+appp.use(passport.session());
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser);
 passport.deserializeUser(User.deserializeUser);
 
-router.use((req, res, next) => {
-    res.locals.flashMessages = req.flash();
+app.use((req, res, next) => {
     res.locals.loggedIn = req.isUnauthenticated();
     res.locals.currentUser = req.user;
+    res.locals.flashMessages = req.flash();
+    next();
 });
-
-router.get("/", homeController.index);
-
-router.get("/subscriber", subscriberController.index, subscriberController.indexView);
-router.get("/subscriber/new", subscriberController.new);
-router.post("/subscriber/create", subscriberController.create, subscriberController.redirectView);
-router.get("/subscriber/:id", subscriberController.show, subscriberController.showView);
-router.get("/subscriber/:id/edit", subscriberController.edit);
-router.put("/subscriber/:id/update", subscriberController.update, subscriberController.redirectView);
-router.delete("/subscriber/:id/delete", subscriberController.delete, subscriberController.redirectView);
-
-router.get("/users", userController.index, userController.indexView);
-router.get("/users/new", userController.new);
-router.post("/users/create", userController.validate, userController.create, userController.redirectView);
-router.get("/users/:id", userController.create, userController.redirectView);
-
-router.get("/users/login", userController.login);
-router.post("users/login", userController.authenticate);
-router.get("/users/logout", userController.logout, userController.redirectView);
-
-router.get("/users/:id/edit", userController.edit);
-router.put("/users/:id/update", userController.validate, userController.update, userController.redirectView);
-router.delete("/users/:id/delete", userController.delete, userController.redirectView);
-
-router.get("/courses", courseController.index, courseController.indexView);
-router.get("/courses/new", courseController.new);
-router.post("/courses/create", courseController.create, courseController.redirectView);
-router.get("/courses/:id", courseController.create, courseController.redirectView);
-router.get("/courses/:id/edit", courseController.edit);
-router.put("/courses/:id/update", courseController.update, courseController.redirectView);
-router.delete("/courses/:id/delete", courseController.delete, courseController.redirectView);
-
-router.use(errorController.pageNotFoundError);
-router.use(errorController.internalServerError);
 
 app.use("/", router);
 
 app.listen(app.get('port'), () => {
     console.log(`Server is running on port: ${app.get("port")}`)
 });
-
-//app.get("/subscriber", subscriberController.getAllSubscribers);
-//app.get("/contact", subscriberController.getSubscriptionPage);
-//app.post("/subscribe", subscriberController.saveSubscriber);
-
-//app.get("/courses", homeController.showCourses);
-//app.post("/contact", homeController.postedSignUpForm);
-
-//app.get("/contact", homeController.showSignUp);
-//app.post("/contact", homeController.postedSignUpForm);
-//app.get("/", (req, res)=> {
-//    res.render("index");
-//});

@@ -103,7 +103,7 @@ module.exports = {
         })
     },
     showView: (req, res, next) =>{
-        res.render(users/show);
+        res.render('users/show');
     },
     edit: (req, res, next) => {
         let usersId = req.params.id;

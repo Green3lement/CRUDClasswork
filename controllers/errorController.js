@@ -1,10 +1,17 @@
-const httpStatus = require("http-status-codes")
+"use strict";
+
+const httpStatus = require("http-status-codes");
+
+exports.logErrors = (error, req, res, next) => {
+    console.error(error.stack);
+    next(error);
+  };
 
 exports.pageNotFoundError = (req, res) => {
     let errorCode = httpStatus.NOT_FOUND;
     res.status(errorCode);
     res.render("error");
-}
+};
 
 exports.internalServerError = (error, req, res, next) => {
     let errorCode = httpStatus.INTERNAL_SERVER_ERROR;
@@ -12,4 +19,4 @@ exports.internalServerError = (error, req, res, next) => {
     res.send(`${errorCode}, Opps! That happened...`);
     res.render("error");
     console.error(error.stack)
-}
+};
