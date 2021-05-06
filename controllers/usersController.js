@@ -54,6 +54,7 @@ module.exports = {
     else next();
   },
   show: (req, res, next) => {
+    console.log(res);
     let userId = req.params.id;
     User.findById(userId)
       .then(user => {
