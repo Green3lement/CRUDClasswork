@@ -64,7 +64,7 @@ app.use(expressSession({
 
 
 app.use(passport.initialize());
-appp.use(passport.session());
+app.use(passport.session());
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser);
 passport.deserializeUser(User.deserializeUser);
