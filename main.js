@@ -18,17 +18,16 @@ const express = require("express"), app = express(),
     mongoose = require("mongoose"),
     passport = require("passport");
 
-mongoose.connect("mongodb://localhost:27017/confetti_cuisine",
-    { useNewUrlParser: true });
+mongoose.connect(
+    process.env.MONGODB_URI || "mongodb://localhost:27017/confetti_cuisine",
+    { useNewUrlParser: true, useFindAndModify: false }
+    );
 
 mongoose.set("useCreateIndex", true);
 
 app.set("port", process.env.PORT || 3000);
 
 app.set("view engine", "ejs");
-
-
-
 
 app.use(
     methodOverride( "_method", { 
