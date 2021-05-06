@@ -3,8 +3,8 @@ const passportLocalMongoose = require("passport-local-mongoose");
 
 const mongoose = require("mongoose"),
 { Schema } = require("mongoose"),
-Subscriber = require("./subscriber"),
-passportLocalMongoose = require("passport-local-mongoose");
+Subscriber = require("./subscriber");
+
 userSchema = new Schema(
     {
         name: {
