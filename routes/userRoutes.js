@@ -1,22 +1,22 @@
+"use strict";
+
 const router = require("express").Router(),
-    userController = require("../controllers/usersController");
+  usersController = require("../controllers/usersController");
 
-router.get("/", userController.index, userController.indexView);
-router.get("/new", userController.new);
+router.get("/", usersController.index, usersController.indexView);
+router.get("/new", usersController.new);
 router.post(
-    "/create",
-    userController.validate,
-    userController.create,
-    userController.redirectView
+  "/create",
+  usersController.validate,
+  usersController.create,
+  usersController.redirectView
 );
-router.get("/:id", userController.create, userController.redirectView);
-
-router.get("/login", userController.login);
-router.post("users/login", userController.authenticate);
-router.get("/logout", userController.logout, userController.redirectView);
-
-router.get("/:id/edit", userController.edit);
-router.put("/:id/update", userController.validate, userController.update, userController.redirectView);
-router.delete("/:id/delete", userController.delete, userController.redirectView);
+router.get("/login", usersController.login);
+router.post("/login", usersController.authenticate);
+router.get("/logout", usersController.logout, usersController.redirectView);
+router.get("/:id/edit", usersController.edit);
+router.put("/:id/update", usersController.update, usersController.redirectView);
+router.get("/:id", usersController.show, usersController.showView);
+router.delete("/:id/delete", usersController.delete, usersController.redirectView);
 
 module.exports = router;

@@ -9,7 +9,7 @@ const express = require("express"), app = express(),
     userController = require("./controllers/usersController"),
     methodOverride = require("method-override"),
     layouts = require("express-ejs-layouts"),
-    cookieParser = require("cookieParser"),
+    cookieParser = require("cookie-parser"),
     expressSession = require("express-session"),
     expressValidator = require("express-validator"),
     connectFlash = require("connect-flash"),
@@ -24,9 +24,16 @@ mongoose.connect(
 
 mongoose.set("useCreateIndex", true);
 
+const db = mongoose.connection;
+
+db.once("open", () => {
+    console.log("Successfully connected to MongoDB using Mongoose!");
+  });
+
 app.set("port", process.env.PORT || 3000);
 
 app.set("view engine", "ejs");
+app.set("token", process.env.TOKEN || "recipeT0k3n");
 
 app.use(
     methodOverride( "_method", { 
@@ -55,13 +62,13 @@ app.use(expressSession({
     saveUninitialized: false
 }));
 
-app.use(connectFlash());
 
 app.use(passport.initialize());
 appp.use(passport.session());
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser);
 passport.deserializeUser(User.deserializeUser);
+app.use(connectFlash());
 
 app.use((req, res, next) => {
     res.locals.loggedIn = req.isUnauthenticated();
