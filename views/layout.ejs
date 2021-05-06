@@ -6,9 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1">
 	<title>Recipe App</title>
 	<link rel="shortcut icon" type="image/png" href="/images/icon.png" />
-	<script type="text/javascript" src="/js/jquery.min.js"></script>
-	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/js/recipeApp.js"></script>
+	<script type="text/javascript" src="/public/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/public/js/confettiCuisine.js"></script>
 	<link rel="stylesheet" href="/css/bootstrap.css">
 	<link rel="stylesheet" href="/css/recipe_app.css">
 </head>
@@ -36,7 +36,7 @@
 		<div class="login-status">
 			<% if (loggedIn) { %>
 			<div class="bubble logged-in">
-				Logged in as <a href="<%=`/users/${currentUser._id}`%>">
+				Logged in as <a href="<%=`/users/${user._id}`%>">
 					<%= currentUser.fullName %></a>
 			</div>
 			<div class="log-out">
