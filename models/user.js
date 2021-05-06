@@ -28,10 +28,10 @@ userSchema = new Schema(
             max: 99999
         },
         courses: [{
-            type: Schema.Types.ObjectId, ref: Course
+            type: Schema.Types.ObjectId, ref: "Course"
         }],
         subscribedAccount: {
-            type: Schema.Types.ObjectId, ref: Subscriber
+            type: Schema.Types.ObjectId, ref: "Subscriber"
         }
     },
     {
