@@ -1,16 +1,14 @@
-const router = require("express").Router(),
-    courseController = require("../controllers/coursesController");
+"use strict";
 
-router.get("/", courseController.index, courseController.indexView);
-router.get("/new", courseController.new);
-router.post(
-    "/create",
-    courseController.create,
-    courseController.redirectView
-);
-router.get("/:id", courseController.create, courseController.redirectView);
-router.get("/:id/edit", courseController.edit);
-router.put("/:id/update", courseController.update, courseController.redirectView);
-router.delete("/:id/delete", courseController.delete, courseController.redirectView);
+const router = require("express").Router(),
+  coursesController = require("../controllers/coursesController");
+
+router.get("", coursesController.index, coursesController.indexView);
+router.get("/new", coursesController.new);
+router.post("/create", coursesController.create, coursesController.redirectView);
+router.get("/:id/edit", coursesController.edit);
+router.put("/:id/update", coursesController.update, coursesController.redirectView);
+router.get("/:id", coursesController.show, coursesController.showView);
+router.delete("/:id/delete", coursesController.delete, coursesController.redirectView);
 
 module.exports = router;
