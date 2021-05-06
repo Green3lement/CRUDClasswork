@@ -1,36 +1,30 @@
-<h2 class="center"> Subscriber Data for <%= subcriber.name %></h2>
-<table class="table">
-    <tbody>
-        <% subscribers.forEach(subscriber => {%
-            <tr>
-                <td>Name</td>
-                <td>
-                    <%= subcriber.name %>
-                </td>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td>
-                    <%= subcriber.email %>
-                </td>
-            </tr>
-            <tr>
-                <td>Zip Code</td>
-                <td>
-                    <%= subcriber.zipCode %>
-                </td>
-            </tr>
-            <tr>
-                <td>Number of courses</td>
-                <td>
-                    <%= subcriber.courses.length %>
-                </td>
-            </tr>
-    </tbody>
-</table>
-
-
-<div>
+<h1 class="center">Subscriber Data for
+    <%= subscriber.name %>
+  </h1>
+  
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <td>
+        <%= subscriber.name %>
+      </td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <td>
+        <%= subscriber.email%>
+      </td>
+    </tr>
+    <tr>
+      <th>Zip Code</th>
+      <td>
+        <%= subscriber.zipCode%>
+      </td>
+    </tr>
+  </table>
+  
+  
+  <div>
     <a class="button" href="/subscribers">View all subscribers</a>
   </div>
   <div>
